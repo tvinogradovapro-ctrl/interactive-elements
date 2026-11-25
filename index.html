@@ -1,488 +1,12 @@
-<html>
-<body>
-<!--StartFragment-->
 <!DOCTYPE html>
---
-<html lang="ru">
-<head>
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Упражнение: Сравнение точек зрения</title>
-<!-- Подключение шрифта Inter -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<style>
-* {
-box-sizing: border-box;
-margin: 0;
-padding: 0;
-}
- 
-body {
-font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-background-color: #F8FAFC;
-color: #0F172A;
-min-height: 100vh;
-display: flex;
-align-items: center;
-justify-content: center;
-padding: 16px;
-}
- 
-/* Основной контейнер упражнения */
-.exercise-wrapper {
-width: 100%;
-max-width: 820px;
-background: #FFFFFF;
-border: 1px solid #E2E8F0;
-border-radius: 20px;
-padding: 24px 28px;
-box-shadow: 0 8px 30px rgba(15, 23, 42, 0.04);
-}
- 
-/* Сетка для двух карточек рядом без скролла */
-.cards-grid {
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-gap: 24px;
-margin-top: 18px;
-margin-bottom: 18px;
-}
- 
-/* Карточка с рамкой в фирменном терракотово-оранжевом цвете */
-.card {
-background: #FFFFFF;
-border: 2px solid #E2E8F0;
-border-radius: 18px;
-padding: 14px;
-cursor: pointer;
-display: flex;
-flex-direction: column;
-text-align: left;
-transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-box-shadow 0.28s ease,
-border-color 0.28s ease,
-background-color 0.28s ease;
-position: relative;
-}
- 
-/* Эффект увеличения и тёплой подсветки при наведении */
-.card:hover {
-transform: scale(1.03);
-border-color: #F25430;
-box-shadow: 0 14px 32px rgba(242, 84, 48, 0.20),
-0 0 0 4px rgba(242, 84, 48, 0.12);
-z-index: 2;
-}
- 
-/* Состояние выбранной карточки */
-.card.selected {
-border-color: #F25430;
-background-color: #FFF8F6;
-box-shadow: 0 10px 24px rgba(242, 84, 48, 0.16),
-0 0 0 3px rgba(242, 84, 48, 0.15);
-}
- 
-/* Контейнер изображения / векторного превью */
-.media-box {
-width: 100%;
-aspect-ratio: 1 / 1;
-max-height: 310px;
-border-radius: 14px;
-border: 1.5px solid #F25430;
-background-color: #FFFFFF;
-overflow: hidden;
-display: flex;
-align-items: center;
-justify-content: center;
-margin-bottom: 12px;
-}
- 
-.media-box img,
-.media-box svg {
-width: 100%;
-height: 100%;
-object-fit: contain;
-display: block;
-transition: transform 0.3s ease;
-}
- 
-.card:hover .media-box img,
-.card:hover .media-box svg {
-transform: scale(1.02);
-}
- 
-/* Подпись под картинкой, подтягиваемая из src */
-.card-footer {
-display: flex;
-align-items: center;
-justify-content: space-between;
-gap: 8px;
-}
- 
-.card-caption {
-font-size: 16px;
-font-weight: 600;
-color: #0F172A;
-text-align: left;
-}
- 
-.file-badge {
-font-size: 12px;
-font-weight: 500;
-color: #64748B;
-background: #F1F5F9;
-padding: 3px 8px;
-border-radius: 6px;
-font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-}
- 
-.card.selected .file-badge {
-background: #FFEDD5;
-color: #C2410C;
-}
- 
-/* Панель обратной связи внизу */
-.feedback-bar {
-padding: 12px 16px;
-border-radius: 12px;
-background-color: #F1F5F9;
-border: 1px solid #E2E8F0;
-color: #334155;
-font-size: 14px;
-text-align: left;
-display: flex;
-align-items: center;
-justify-content: space-between;
-flex-wrap: wrap;
-gap: 10px;
-transition: all 0.25s ease;
-}
- 
-.feedback-bar.active {
-background-color: #FFF5F2;
-border-color: #FDBA74;
-color: #9A3412;
-font-weight: 500;
-}
- 
-.src-hint {
-font-size: 12px;
-color: #64748B;
-}
- 
-@media (max-width: 640px) {
-.cards-grid {
-grid-template-columns: 1fr;
-}
-.media-box {
-max-height: 260px;
-}
-}
-</style>
-</head>
-<body>
- 
-<main class="exercise-wrapper">
-<!-- Заголовок упражнения (выравнивание по левому краю) -->
-<header class="text-left">
-<div class="flex items-center justify-between gap-2 flex-wrap">
-<h1 class="text-xl font-semibold text-slate-900 tracking-tight">
-Выберите карточку с подходящей ситуацией
-</h1>
-<span class="text-xs font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md">
-Встроены: 1.1.png и 1.2.png
-</span>
-</div>
-<p class="text-sm text-slate-500 mt-1">
-Наведите курсор на карточку, чтобы подсветить и увеличить её, затем кликните для выбора.
-</p>
-</header>
- 
-<!-- Сетка карточек -->
-<section class="cards-grid" aria-label="Карточки выбора">
- 
-<!-- Карточка 1: src="1.1.png" -->
-<article class="card" onclick="selectCard(this)" tabindex="0" role="button" aria-label="Выбрать карточку 1.1">
-<div class="media-box">
-<img
-src="1.1.png"
-alt="POV покупатель: Когда хотел просто купить новую сковородку, а обнаружил себя мечтающим о новой кухне"
-onerror="renderFallbackSVG(this, '1.1')"
->
-</div>
-<div class="card-footer">
-<span class="card-caption"></span>
-<span class="file-badge"></span>
-</div>
-</article>
- 
-<!-- Карточка 2: src="1.2.png" -->
-<article class="card" onclick="selectCard(this)" tabindex="0" role="button" aria-label="Выбрать карточку 1.2">
-<div class="media-box">
-<img
-src="1.2.png"
-alt="POV продавец: Когда клиент хотел купить новую сковородку, а ты убедил его в том, что новая сковородка ни к чему на старой кухне..."
-onerror="renderFallbackSVG(this, '1.2')"
->
-</div>
-<div class="card-footer">
-<span class="card-caption"></span>
-<span class="file-badge"></span>
-</div>
-</article>
- 
-</section>
- 
-<!-- Нижняя строка статуса -->
-<footer class="feedback-bar" id="feedbackBar">
-<span id="feedbackText">Карточка пока не выбрана. Нажмите на любую иллюстрацию выше.</span>
-<span class="src-hint">Названия автоматически считаны из атрибутов <code>src</code></span>
-</footer>
-</main>
- 
-<script>
-/**
-* 1. Автоматически считываем атрибут src у каждой картинки,
-* отрезаем расширение (.png) для чистого заголовка и показываем имя файла.
-*/
-function initCaptionsFromSrc() {
-const cards = document.querySelectorAll('.card');
-cards.forEach((card) => {
-const img = card.querySelector('img');
-const captionEl = card.querySelector('.card-caption');
-const badgeEl = card.querySelector('.file-badge');
- 
-if (!img) return;
- 
-// Получаем точное значение из src (например, "1.1.png")
-const rawSrc = decodeURIComponent(img.getAttribute('src') \|\| '');
-const fullFileName = rawSrc.split('/').pop();
-// Убираем расширение файла (.png / .jpg)
-const cleanTitle = fullFileName.replace(/\.[^/.]+$/, '');
- 
-captionEl.textContent = cleanTitle;
-badgeEl.textContent = fullFileName;
-card.dataset.title = cleanTitle;
-card.dataset.filename = fullFileName;
-});
-}
- 
-/**
-* 2. Обработка выбора карточки по клику или клавише Enter/Space
-*/
-function selectCard(selectedCard) {
-document.querySelectorAll('.card').forEach((c) => c.classList.remove('selected'));
-selectedCard.classList.add('selected');
- 
-const title = selectedCard.dataset.title;
-const filename = selectedCard.dataset.filename;
-const feedbackBar = document.getElementById('feedbackBar');
-const feedbackText = document.getElementById('feedbackText');
- 
-feedbackText.textContent = `Выбрана карточка «${title}» (файл: ${filename})`;
-feedbackBar.classList.add('active');
-}
- 
-// Поддержка выбора с клавиатуры
-document.querySelectorAll('.card').forEach((card) => {
-card.addEventListener('keydown', (e) => {
-if (e.key === 'Enter' \|\| e.key === ' ') {
-e.preventDefault();
-selectCard(card);
-}
-});
-});
- 
-/**
-* 3. Встроенный SVG-фолбэк для мгновенного превью:
-* Если локальные файлы 1.1.png / 1.2.png не найдены в песочнице превью,
-* отрисовываем стилизованные векторные иллюстрации с оригинальными подписями.
-* При размещении рядом с настоящими файлами 1.1.png и 1.2.png загрузятся они.
-*/
-function renderFallbackSVG(imgElement, type) {
-const container = imgElement.parentElement;
-if (!container) return;
- 
-if (type === '1.1') {
-container.innerHTML = `
-<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="1.1.png">
-<rect width="500" height="500" fill="#FFFFFF"/>
-<!-- Пол / проекция -->
-<polygon points="285,345 370,320 345,355 265,355" fill="#E8BA88"/>
-<!-- Оси X и Y -->
-<line x1="235" y1="368" x2="320" y2="368" stroke="#E08E45" stroke-width="2.5"/>
-<line x1="235" y1="363" x2="235" y2="373" stroke="#E08E45" stroke-width="2.5"/>
-<line x1="320" y1="363" x2="320" y2="373" stroke="#E08E45" stroke-width="2.5"/>
-<text x="274" y="384" fill="#E08E45" font-family="Inter, sans-serif" font-size="14" font-weight="600">y</text>
- 
-<line x1="382" y1="265" x2="382" y2="335" stroke="#E08E45" stroke-width="2.5"/>
-<line x1="377" y1="265" x2="387" y2="265" stroke="#E08E45" stroke-width="2.5"/>
-<line x1="377" y1="335" x2="387" y2="335" stroke="#E08E45" stroke-width="2.5"/>
-<text x="390" y="304" fill="#E08E45" font-family="Inter, sans-serif" font-size="14" font-weight="600">x</text>
- 
-<!-- Красный 3D-куб -->
-<g transform="translate(245, 240) rotate(-22)">
-<polygon points="0,25 65,0 115,22 50,47" fill="#EA8C8C"/>
-<polygon points="0,25 50,47 50,105 0,83" fill="#D95353"/>
-<polygon points="50,47 115,22 115,80 50,105" fill="#8C3333"/>
-</g>
- 
-<!-- Мятный угольник в лапе -->
-<g transform="translate(315, 165) rotate(-12)">
-<polygon points="0,45 70,0 45,95" fill="#8EDBC7"/>
-<polygon points="22,43 52,22 39,68" fill="#FFFFFF"/>
-</g>
- 
-<!-- Хвост кота -->
-<path d="M165,245 C110,245 100,175 125,130 C132,118 146,125 140,140 C122,175 130,220 172,222 Z" fill="#E69244"/>
-<path d="M113,172 Q122,175 127,168" stroke="#8C3D2B" stroke-width="5" stroke-linecap="round"/>
-<path d="M116,208 Q126,208 131,200" stroke="#8C3D2B" stroke-width="5" stroke-linecap="round"/>
- 
-<!-- Тело рыжего кота -->
-<ellipse cx="215" cy="215" rx="58" ry="68" transform="rotate(-12 215 215)" fill="#E69244"/>
-<ellipse cx="226" cy="222" rx="34" ry="48" transform="rotate(-12 226 222)" fill="#F7CFA3"/>
-<!-- Лапки -->
-<path d="M180,272 C175,305 185,345 198,355 C208,360 212,348 205,332 L205,275 Z" fill="#E69244"/>
-<path d="M225,275 C225,300 232,328 242,336 C250,340 253,330 247,315 L245,272 Z" fill="#D47E35"/>
- 
-<!-- Розовый угольник в правой лапе -->
-<g transform="translate(212, 185) rotate(12)">
-<polygon points="0,35 55,0 45,75" fill="#DF6C6C"/>
-<polygon points="18,34 42,18 36,52" fill="#FFFFFF"/>
-</g>
-<!-- Правая лапа поверх угольника -->
-<path d="M185,180 C195,205 218,218 236,214 C244,210 240,198 228,195 C215,192 206,182 202,172 Z" fill="#E69244" stroke="#8C3D2B" stroke-width="1.5"/>
- 
-<!-- Голова кота -->
-<g transform="translate(255, 118) rotate(12)">
-<!-- Уши -->
-<polygon points="-45,-25 -36,-62 -12,-35" fill="#E69244"/>
-<polygon points="-38,-30 -34,-50 -20,-34" fill="#8C3D2B"/>
-<polygon points="15,-35 38,-62 46,-25" fill="#E69244"/>
-<polygon points="22,-34 35,-50 40,-30" fill="#8C3D2B"/>
-<!-- Мордочка -->
-<ellipse cx="0" cy="0" rx="52" ry="42" fill="#E69244"/>
-<!-- Полоски на лбу -->
-<path d="M-8,-40 L-6,-26 M2,-41 L2,-25 M12,-39 L9,-26" stroke="#8C3D2B" stroke-width="4" stroke-linecap="round"/>
-<!-- Глаза -->
-<circle cx="-22" cy="-4" r="14" fill="#FFFFFF"/>
-<circle cx="-22" cy="-4" r="10" fill="#8C3D2B"/>
-<circle cx="22" cy="-4" r="14" fill="#FFFFFF"/>
-<circle cx="22" cy="-4" r="10" fill="#8C3D2B"/>
-<!-- Мордочка и носик -->
-<ellipse cx="0" cy="10" rx="14" ry="10" fill="#C97638"/>
-<path d="M-4,6 L4,6 L0,11 Z" fill="#6E2E20"/>
-<path d="M0,11 L0,16 M-6,17 Q0,14 6,17" stroke="#6E2E20" stroke-width="2" fill="none"/>
-</g>
- 
-<!-- Оригинальный текст с иллюстрации -->
-<text x="250" y="422" text-anchor="middle" fill="#231815" font-family="Inter, sans-serif" font-size="16" font-weight="500">
-POV покупатель: Когда хотел просто купить
-</text>
-<text x="250" y="444" text-anchor="middle" fill="#231815" font-family="Inter, sans-serif" font-size="16" font-weight="500">
-новую сковородку, а обнаружил себя
-</text>
-<text x="250" y="466" text-anchor="middle" fill="#231815" font-family="Inter, sans-serif" font-size="16" font-weight="500">
-мечтающим о новой кухне
-</text>
-</svg>
-`;
-} else {
-container.innerHTML = `
-<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="1.2.png">
-<rect width="500" height="500" fill="#FFFFFF"/>
-<!-- Большая мятная звезда на фоне -->
-<polygon points="210,35 262,115 365,90 322,185 375,268 275,258 215,335 195,235 102,195 188,140" fill="#B9F3EA"/>
-<!-- Маленькие красные звёздочки -->
-<polygon points="158,225 166,236 179,235 171,246 176,258 163,253 153,261 154,248 143,241 156,237" fill="#DF5753"/>
-<polygon points="315,58 319,64 326,64 321,69 323,76 316,72 310,76 311,69 306,65 313,64" fill="#DF5753"/>
- 
-<!-- Золотой кубок -->
-<g transform="translate(115, 82) rotate(26)">
-<!-- Ручки кубка -->
-<path d="M12,24 C-14,24 -14,68 18,68" fill="none" stroke="#F0A148" stroke-width="8" stroke-linecap="round"/>
-<path d="M78,24 C104,24 104,68 72,68" fill="none" stroke="#F0A148" stroke-width="8" stroke-linecap="round"/>
-<!-- Чаша -->
-<path d="M12,15 L78,15 L68,68 C64,86 26,86 22,68 Z" fill="#F0A148"/>
-<ellipse cx="45" cy="15" rx="33" ry="8" fill="#8C3333"/>
-<!-- Белая звёздочка на кубке -->
-<polygon points="45,35 48,43 56,43 50,48 52,56 45,51 38,56 40,48 34,43 42,43" fill="#FFFFFF"/>
-<!-- Ножка и основание -->
-<rect x="39" y="80" width="12" height="32" fill="#E38D34"/>
-<ellipse cx="45" cy="114" rx="24" ry="7" fill="#F0A148"/>
-<path d="M21,114 L21,124 C21,130 69,130 69,124 L69,114 Z" fill="#8C3333"/>
-</g>
- 
-<!-- Хвост кота -->
-<path d="M262,275 C255,335 235,375 198,370 C172,366 168,332 178,298 C182,286 195,290 191,304 C183,330 186,352 202,354 C226,357 240,322 246,272 Z" fill="#E69244"/>
- 
-<!-- Тело радостного кота в прыжке -->
-<ellipse cx="295" cy="212" rx="68" ry="78" transform="rotate(14 295 212)" fill="#F09B48"/>
-<ellipse cx="300" cy="238" rx="46" ry="54" transform="rotate(14 300 238)" fill="#FAD3A8"/>
-<!-- Задние лапы -->
-<path d="M245,252 C220,255 208,268 214,295 C218,312 214,324 218,328 C225,332 232,318 232,295 L258,278 Z" fill="#F09B48"/>
-<path d="M282,290 C282,318 294,335 290,362 C288,376 298,378 302,364 C306,348 304,336 320,330 C338,324 342,295 340,268 Z" fill="#E08636"/>
- 
-<!-- Красный галстук -->
-<path d="M266,162 L285,172 L274,212 C268,218 252,212 242,218 C234,222 222,212 218,205 L242,188 L262,182 Z" fill="#E05C5C"/>
- 
-<!-- Передние лапы -->
-<path d="M256,184 C230,174 202,172 190,192 C184,202 196,208 212,204 C228,200 242,196 256,196 Z" fill="#F09B48" stroke="#8C3D2B" stroke-width="1.5"/>
-<path d="M322,148 C302,144 282,158 276,174 C272,184 286,188 302,182 C318,176 332,170 342,162 Z" fill="#F09B48" stroke="#8C3D2B" stroke-width="1.5"/>
- 
-<!-- Голова кота (смотрит вверх) -->
-<g transform="translate(262, 114) rotate(-24)">
-<polygon points="-46,-20 -38,-58 -14,-32" fill="#F09B48"/>
-<polygon points="-39,-26 -35,-46 -21,-31" fill="#8C3D2B"/>
-<polygon points="14,-32 38,-58 46,-20" fill="#F09B48"/>
-<polygon points="21,-31 35,-46 39,-26" fill="#8C3D2B"/>
-<ellipse cx="0" cy="0" rx="54" ry="43" fill="#F09B48"/>
-<circle cx="-22" cy="-8" r="14" fill="#FFFFFF"/>
-<circle cx="-22" cy="-10" r="10" fill="#8C3D2B"/>
-<circle cx="22" cy="-8" r="14" fill="#FFFFFF"/>
-<circle cx="22" cy="-10" r="10" fill="#8C3D2B"/>
-<ellipse cx="0" cy="4" rx="13" ry="9" fill="#D17B3C"/>
-<path d="M-4,-1 L4,-1 L0,4 Z" fill="#6E2E20"/>
-<path d="M0,4 L0,10" stroke="#6E2E20" stroke-width="2"/>
-</g>
- 
-<!-- Оригинальный текст с иллюстрации -->
-<text x="250" y="422" text-anchor="middle" fill="#231815" font-family="Inter, sans-serif" font-size="16" font-weight="500">
-POV продавец: Когда клиент хотел купить новую
-</text>
-<text x="250" y="444" text-anchor="middle" fill="#231815" font-family="Inter, sans-serif" font-size="16" font-weight="500">
-сковородку, а ты убедил его в том, что новая
-</text>
-<text x="250" y="466" text-anchor="middle" fill="#231815" font-family="Inter, sans-serif" font-size="16" font-weight="500">
-сковородка ни к чему на старой кухне...
-</text>
-</svg>
-`;
-}
-}
- 
-// Запускаем подтягивание названий при загрузке страницы
-initCaptionsFromSrc();
-</script>
-</body>
-</html>
-
-<!--EndFragment-->
-</body>
-</html><!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Упражнение: Сравнение точек зрения</title>
-  <!-- Подключение шрифта Inter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com/">
-  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com/"></script>
+  <title>Упражнение: 1.1 и 1.2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
@@ -492,82 +16,52 @@ initCaptionsFromSrc();
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: #F8FAFC;
+      background-color: #FFFFFF;
       color: #0F172A;
       min-height: 100vh;
       display: flex;
-      align-items: center;
       justify-content: center;
-      padding: 16px;
+      align-items: center;
+      padding: 24px;
     }
 
-    /* Основной контейнер упражнения */
-    .exercise-wrapper {
+    .exercise {
       width: 100%;
-      max-width: 820px;
-      background: #FFFFFF;
-      border: 1px solid #E2E8F0;
-      border-radius: 20px;
-      padding: 24px 28px;
-      box-shadow: 0 8px 30px rgba(15, 23, 42, 0.04);
+      max-width: 780px;
     }
 
-    /* Сетка для двух карточек рядом без скролла */
+    .exercise-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #0F172A;
+      text-align: left;
+      margin-bottom: 24px;
+    }
+
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-      margin-top: 18px;
-      margin-bottom: 18px;
+      gap: 28px;
     }
 
-    /* Карточка с рамкой в фирменном терракотово-оранжевом цвете */
+    /* Карточка без лишних рамок и подложек */
     .card {
-      background: #FFFFFF;
-      border: 2px solid #E2E8F0;
-      border-radius: 18px;
-      padding: 14px;
       cursor: pointer;
       display: flex;
       flex-direction: column;
-      text-align: left;
-      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-                  box-shadow 0.28s ease,
-                  border-color 0.28s ease,
-                  background-color 0.28s ease;
-      position: relative;
+      align-items: flex-start;
+      outline: none;
     }
 
-    /* Эффект увеличения и тёплой подсветки при наведении */
-    .card:hover {
-      transform: scale(1.03);
-      border-color: #F25430;
-      box-shadow: 0 14px 32px rgba(242, 84, 48, 0.20),
-                  0 0 0 4px rgba(242, 84, 48, 0.12);
-      z-index: 2;
-    }
-
-    /* Состояние выбранной карточки */
-    .card.selected {
-      border-color: #F25430;
-      background-color: #FFF8F6;
-      box-shadow: 0 10px 24px rgba(242, 84, 48, 0.16),
-                  0 0 0 3px rgba(242, 84, 48, 0.15);
-    }
-
-    /* Контейнер изображения / векторного превью */
+    /* Контейнер повторяет форму самой картинки */
     .media-box {
       width: 100%;
       aspect-ratio: 1 / 1;
-      max-height: 310px;
-      border-radius: 14px;
-      border: 1.5px solid #F25430;
-      background-color: #FFFFFF;
+      border-radius: 24px;
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 12px;
+      background-color: #FFFFFF;
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+                  box-shadow 0.28s ease;
     }
 
     .media-box img,
@@ -576,106 +70,55 @@ initCaptionsFromSrc();
       height: 100%;
       object-fit: contain;
       display: block;
-      transition: transform 0.3s ease;
     }
 
-    .card:hover .media-box img,
-    .card:hover .media-box svg {
+    /* Увеличение и мягкая подсветка при наведении */
+    .card:hover .media-box,
+    .card:focus-visible .media-box {
+      transform: scale(1.03);
+      box-shadow: 0 14px 32px rgba(242, 84, 48, 0.22);
+    }
+
+    /* Акцент при выборе карточки */
+    .card.selected .media-box {
       transform: scale(1.02);
-    }
-
-    /* Подпись под картинкой, подтягиваемая из src */
-    .card-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
+      box-shadow: 0 14px 36px rgba(242, 84, 48, 0.32);
     }
 
     .card-caption {
+      margin-top: 12px;
       font-size: 16px;
-      font-weight: 600;
-      color: #0F172A;
-      text-align: left;
-    }
-
-    .file-badge {
-      font-size: 12px;
       font-weight: 500;
-      color: #64748B;
-      background: #F1F5F9;
-      padding: 3px 8px;
-      border-radius: 6px;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    }
-
-    .card.selected .file-badge {
-      background: #FFEDD5;
-      color: #C2410C;
-    }
-
-    /* Панель обратной связи внизу */
-    .feedback-bar {
-      padding: 12px 16px;
-      border-radius: 12px;
-      background-color: #F1F5F9;
-      border: 1px solid #E2E8F0;
       color: #334155;
-      font-size: 14px;
       text-align: left;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 10px;
-      transition: all 0.25s ease;
+      transition: color 0.2s ease;
     }
 
-    .feedback-bar.active {
-      background-color: #FFF5F2;
-      border-color: #FDBA74;
-      color: #9A3412;
-      font-weight: 500;
+    .card:hover .card-caption {
+      color: #0F172A;
     }
 
-    .src-hint {
-      font-size: 12px;
-      color: #64748B;
+    .card.selected .card-caption {
+      color: #F25430;
+      font-weight: 600;
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 600px) {
       .cards-grid {
         grid-template-columns: 1fr;
-      }
-      .media-box {
-        max-height: 260px;
+        gap: 24px;
       }
     }
   </style>
 </head>
 <body>
 
-  <main class="exercise-wrapper">
-    <!-- Заголовок упражнения (выравнивание по левому краю) -->
-    <header class="text-left">
-      <div class="flex items-center justify-between gap-2 flex-wrap">
-        <h1 class="text-xl font-semibold text-slate-900 tracking-tight">
-          Выберите карточку с подходящей ситуацией
-        </h1>
-        <span class="text-xs font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md">
-          Встроены: [1.1.png](https://github.com/tvinogradovapro-ctrl/interactive-elements/issues/1.1.png) и 1.2.png
-        </span>
-      </div>
-      <p class="text-sm text-slate-500 mt-1">
-        Наведите курсор на карточку, чтобы подсветить и увеличить её, затем кликните для выбора.
-      </p>
-    </header>
+  <main class="exercise">
+    <h1 class="exercise-title">Выберите карточку</h1>
 
-    <!-- Сетка карточек -->
     <section class="cards-grid" aria-label="Карточки выбора">
-      
       <!-- Карточка 1: src="1.1.png" -->
-      <article class="card" onclick="selectCard(this)" tabindex="0" role="button" aria-label="Выбрать карточку 1.1">
+      <article class="card" onclick="selectCard(this)" tabindex="0" role="button">
         <div class="media-box">
           <img 
             src="1.1.png" 
@@ -683,14 +126,11 @@ initCaptionsFromSrc();
             onerror="renderFallbackSVG(this, '1.1')"
           >
         </div>
-        <div class="card-footer">
-          <span class="card-caption"></span>
-          <span class="file-badge"></span>
-        </div>
+        <div class="card-caption"></div>
       </article>
 
-      <!-- Карточка 2: src="[1.2.png](https://github.com/tvinogradovapro-ctrl/interactive-elements/issues/1.2.png)" -->
-      <article class="card" onclick="selectCard(this)" tabindex="0" role="button" aria-label="Выбрать карточку 1.2">
+      <!-- Карточка 2: src="1.2.png" -->
+      <article class="card" onclick="selectCard(this)" tabindex="0" role="button">
         <div class="media-box">
           <img 
             src="1.2.png" 
@@ -698,65 +138,29 @@ initCaptionsFromSrc();
             onerror="renderFallbackSVG(this, '1.2')"
           >
         </div>
-        <div class="card-footer">
-          <span class="card-caption"></span>
-          <span class="file-badge"></span>
-        </div>
+        <div class="card-caption"></div>
       </article>
-
     </section>
-
-    <!-- Нижняя строка статуса -->
-    <footer class="feedback-bar" id="feedbackBar">
-      <span id="feedbackText">Карточка пока не выбрана. Нажмите на любую иллюстрацию выше.</span>
-      <span class="src-hint">Названия автоматически считаны из атрибутов <code>src</code></span>
-    </footer>
   </main>
 
   <script>
-    /**
-     * 1. Автоматически считываем атрибут src у каждой картинки,
-     * отрезаем расширение (.png) для чистого заголовка и показываем имя файла.
-     */
-    function initCaptionsFromSrc() {
-      const cards = document.querySelectorAll('.card');
-      cards.forEach((card) => {
-        const img = card.querySelector('img');
-        const captionEl = card.querySelector('.card-caption');
-        const badgeEl = card.querySelector('.file-badge');
+    // Автоматически подтягиваем названия из атрибута src (убирая расширение)
+    document.querySelectorAll('.card').forEach((card) => {
+      const img = card.querySelector('img');
+      const caption = card.querySelector('.card-caption');
+      const rawSrc = decodeURIComponent(img.getAttribute('src') || '');
+      const cleanTitle = rawSrc.split('/').pop().replace(/\.[^/.]+$/, '');
 
-        if (!img) return;
+      caption.textContent = cleanTitle;
+      card.setAttribute('aria-label', cleanTitle);
+    });
 
-        // Получаем точное значение из src (например, "1.1.png")
-        const rawSrc = decodeURIComponent(img.getAttribute('src') || '');
-        const fullFileName = rawSrc.split('/').pop();
-        // Убираем расширение файла (.png / .jpg)
-        const cleanTitle = fullFileName.replace(/\.[^/.]+$/, '');
-
-        captionEl.textContent = cleanTitle;
-        badgeEl.textContent = fullFileName;
-        card.dataset.title = cleanTitle;
-        card.dataset.filename = fullFileName;
-      });
-    }
-
-    /**
-     * 2. Обработка выбора карточки по клику или клавише Enter/Space
-     */
+    // Выделение активной карточки по клику или с клавиатуры
     function selectCard(selectedCard) {
       document.querySelectorAll('.card').forEach((c) => c.classList.remove('selected'));
       selectedCard.classList.add('selected');
-
-      const title = selectedCard.dataset.title;
-      const filename = selectedCard.dataset.filename;
-      const feedbackBar = document.getElementById('feedbackBar');
-      const feedbackText = document.getElementById('feedbackText');
-
-      feedbackText.textContent = `Выбрана карточка «${title}» (файл: ${filename})`;
-      feedbackBar.classList.add('active');
     }
 
-    // Поддержка выбора с клавиатуры
     document.querySelectorAll('.card').forEach((card) => {
       card.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -766,12 +170,7 @@ initCaptionsFromSrc();
       });
     });
 
-    /**
-     * 3. Встроенный SVG-фолбэк для мгновенного превью:
-     * Если локальные файлы 1.1.png / 1.2.png не найдены в песочнице превью,
-     * отрисовываем стилизованные векторные иллюстрации с оригинальными подписями.
-     * При размещении рядом с настоящими файлами 1.1.png и 1.2.png загрузятся они.
-     */
+    // Встроенный SVG-фолбэк для превью (если локальные файлы 1.1.png и 1.2.png недоступны)
     function renderFallbackSVG(imgElement, type) {
       const container = imgElement.parentElement;
       if (!container) return;
@@ -779,83 +178,59 @@ initCaptionsFromSrc();
       if (type === '1.1') {
         container.innerHTML = `
           <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="1.1.png">
-            <rect width="500" height="500" fill="#FFFFFF"/>
-            <!-- Пол / проекция -->
+            <rect x="2" y="2" width="496" height="496" rx="28" fill="#FFFFFF" stroke="#F25430" stroke-width="3"/>
             <polygon points="285,345 370,320 345,355 265,355" fill="#E8BA88"/>
-            <!-- Оси X и Y -->
             <line x1="235" y1="368" x2="320" y2="368" stroke="#E08E45" stroke-width="2.5"/>
             <line x1="235" y1="363" x2="235" y2="373" stroke="#E08E45" stroke-width="2.5"/>
             <line x1="320" y1="363" x2="320" y2="373" stroke="#E08E45" stroke-width="2.5"/>
             <text x="274" y="384" fill="#E08E45" font-family="Inter, sans-serif" font-size="14" font-weight="600">y</text>
-
             <line x1="382" y1="265" x2="382" y2="335" stroke="#E08E45" stroke-width="2.5"/>
             <line x1="377" y1="265" x2="387" y2="265" stroke="#E08E45" stroke-width="2.5"/>
             <line x1="377" y1="335" x2="387" y2="335" stroke="#E08E45" stroke-width="2.5"/>
             <text x="390" y="304" fill="#E08E45" font-family="Inter, sans-serif" font-size="14" font-weight="600">x</text>
-
-            <!-- Красный 3D-куб -->
             <g transform="translate(245, 240) rotate(-22)">
               <polygon points="0,25 65,0 115,22 50,47" fill="#EA8C8C"/>
               <polygon points="0,25 50,47 50,105 0,83" fill="#D95353"/>
               <polygon points="50,47 115,22 115,80 50,105" fill="#8C3333"/>
             </g>
-
-            <!-- Мятный угольник в лапе -->
             <g transform="translate(315, 165) rotate(-12)">
               <polygon points="0,45 70,0 45,95" fill="#8EDBC7"/>
               <polygon points="22,43 52,22 39,68" fill="#FFFFFF"/>
             </g>
-
-            <!-- Хвост кота -->
             <path d="M165,245 C110,245 100,175 125,130 C132,118 146,125 140,140 C122,175 130,220 172,222 Z" fill="#E69244"/>
             <path d="M113,172 Q122,175 127,168" stroke="#8C3D2B" stroke-width="5" stroke-linecap="round"/>
             <path d="M116,208 Q126,208 131,200" stroke="#8C3D2B" stroke-width="5" stroke-linecap="round"/>
-
-            <!-- Тело рыжего кота -->
             <ellipse cx="215" cy="215" rx="58" ry="68" transform="rotate(-12 215 215)" fill="#E69244"/>
             <ellipse cx="226" cy="222" rx="34" ry="48" transform="rotate(-12 226 222)" fill="#F7CFA3"/>
-            <!-- Лапки -->
             <path d="M180,272 C175,305 185,345 198,355 C208,360 212,348 205,332 L205,275 Z" fill="#E69244"/>
             <path d="M225,275 C225,300 232,328 242,336 C250,340 253,330 247,315 L245,272 Z" fill="#D47E35"/>
-
-            <!-- Розовый угольник в правой лапе -->
             <g transform="translate(212, 185) rotate(12)">
               <polygon points="0,35 55,0 45,75" fill="#DF6C6C"/>
               <polygon points="18,34 42,18 36,52" fill="#FFFFFF"/>
             </g>
-            <!-- Правая лапа поверх угольника -->
             <path d="M185,180 C195,205 218,218 236,214 C244,210 240,198 228,195 C215,192 206,182 202,172 Z" fill="#E69244" stroke="#8C3D2B" stroke-width="1.5"/>
-
-            <!-- Голова кота -->
             <g transform="translate(255, 118) rotate(12)">
-              <!-- Уши -->
               <polygon points="-45,-25 -36,-62 -12,-35" fill="#E69244"/>
               <polygon points="-38,-30 -34,-50 -20,-34" fill="#8C3D2B"/>
               <polygon points="15,-35 38,-62 46,-25" fill="#E69244"/>
               <polygon points="22,-34 35,-50 40,-30" fill="#8C3D2B"/>
-              <!-- Мордочка -->
               <ellipse cx="0" cy="0" rx="52" ry="42" fill="#E69244"/>
-              <!-- Полоски на лбу -->
               <path d="M-8,-40 L-6,-26 M2,-41 L2,-25 M12,-39 L9,-26" stroke="#8C3D2B" stroke-width="4" stroke-linecap="round"/>
-              <!-- Глаза -->
               <circle cx="-22" cy="-4" r="14" fill="#FFFFFF"/>
               <circle cx="-22" cy="-4" r="10" fill="#8C3D2B"/>
               <circle cx="22" cy="-4" r="14" fill="#FFFFFF"/>
               <circle cx="22" cy="-4" r="10" fill="#8C3D2B"/>
-              <!-- Мордочка и носик -->
               <ellipse cx="0" cy="10" rx="14" ry="10" fill="#C97638"/>
               <path d="M-4,6 L4,6 L0,11 Z" fill="#6E2E20"/>
               <path d="M0,11 L0,16 M-6,17 Q0,14 6,17" stroke="#6E2E20" stroke-width="2" fill="none"/>
             </g>
-
-            <!-- Оригинальный текст с иллюстрации -->
-            <text x="250" y="422" text-anchor="middle" fill="#231815" font-family="Inter, sans-serif" font-size="16" font-weight="500">
+            <text x="250" y="420" text-anchor="middle" fill="#231815" font-family="Inter, sans-serif" font-size="16" font-weight="500">
               POV покупатель: Когда хотел просто купить
             </text>
-            <text x="250" y="444" text-anchor="middle" fill="#231815" font-family="Inter, sans-serif" font-size="16" font-weight="500">
+            <text x="250" y="442" text-anchor="middle" fill="#231815" font-family="Inter, sans-serif" font-size="16" font-weight="500">
               новую сковородку, а обнаружил себя
             </text>
-            <text x="250" y="466" text-anchor="middle" fill="#231815" font-family="Inter, sans-serif" font-size="16" font-weight="500">
+            <text x="250" y="464" text-anchor="middle" fill="#231815" font-family="Inter, sans-serif" font-size="16" font-weight="500">
               мечтающим о новой кухне
             </text>
           </svg>
@@ -863,47 +238,28 @@ initCaptionsFromSrc();
       } else {
         container.innerHTML = `
           <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="1.2.png">
-            <rect width="500" height="500" fill="#FFFFFF"/>
-            <!-- Большая мятная звезда на фоне -->
+            <rect x="2" y="2" width="496" height="496" rx="28" fill="#FFFFFF" stroke="#F25430" stroke-width="3"/>
             <polygon points="210,35 262,115 365,90 322,185 375,268 275,258 215,335 195,235 102,195 188,140" fill="#B9F3EA"/>
-            <!-- Маленькие красные звёздочки -->
             <polygon points="158,225 166,236 179,235 171,246 176,258 163,253 153,261 154,248 143,241 156,237" fill="#DF5753"/>
             <polygon points="315,58 319,64 326,64 321,69 323,76 316,72 310,76 311,69 306,65 313,64" fill="#DF5753"/>
-
-            <!-- Золотой кубок -->
             <g transform="translate(115, 82) rotate(26)">
-              <!-- Ручки кубка -->
               <path d="M12,24 C-14,24 -14,68 18,68" fill="none" stroke="#F0A148" stroke-width="8" stroke-linecap="round"/>
               <path d="M78,24 C104,24 104,68 72,68" fill="none" stroke="#F0A148" stroke-width="8" stroke-linecap="round"/>
-              <!-- Чаша -->
               <path d="M12,15 L78,15 L68,68 C64,86 26,86 22,68 Z" fill="#F0A148"/>
               <ellipse cx="45" cy="15" rx="33" ry="8" fill="#8C3333"/>
-              <!-- Белая звёздочка на кубке -->
               <polygon points="45,35 48,43 56,43 50,48 52,56 45,51 38,56 40,48 34,43 42,43" fill="#FFFFFF"/>
-              <!-- Ножка и основание -->
               <rect x="39" y="80" width="12" height="32" fill="#E38D34"/>
               <ellipse cx="45" cy="114" rx="24" ry="7" fill="#F0A148"/>
               <path d="M21,114 L21,124 C21,130 69,130 69,124 L69,114 Z" fill="#8C3333"/>
             </g>
-
-            <!-- Хвост кота -->
             <path d="M262,275 C255,335 235,375 198,370 C172,366 168,332 178,298 C182,286 195,290 191,304 C183,330 186,352 202,354 C226,357 240,322 246,272 Z" fill="#E69244"/>
-
-            <!-- Тело радостного кота в прыжке -->
             <ellipse cx="295" cy="212" rx="68" ry="78" transform="rotate(14 295 212)" fill="#F09B48"/>
             <ellipse cx="300" cy="238" rx="46" ry="54" transform="rotate(14 300 238)" fill="#FAD3A8"/>
-            <!-- Задние лапы -->
             <path d="M245,252 C220,255 208,268 214,295 C218,312 214,324 218,328 C225,332 232,318 232,295 L258,278 Z" fill="#F09B48"/>
             <path d="M282,290 C282,318 294,335 290,362 C288,376 298,378 302,364 C306,348 304,336 320,330 C338,324 342,295 340,268 Z" fill="#E08636"/>
-
-            <!-- Красный галстук -->
             <path d="M266,162 L285,172 L274,212 C268,218 252,212 242,218 C234,222 222,212 218,205 L242,188 L262,182 Z" fill="#E05C5C"/>
-
-            <!-- Передние лапы -->
             <path d="M256,184 C230,174 202,172 190,192 C184,202 196,208 212,204 C228,200 242,196 256,196 Z" fill="#F09B48" stroke="#8C3D2B" stroke-width="1.5"/>
             <path d="M322,148 C302,144 282,158 276,174 C272,184 286,188 302,182 C318,176 332,170 342,162 Z" fill="#F09B48" stroke="#8C3D2B" stroke-width="1.5"/>
-
-            <!-- Голова кота (смотрит вверх) -->
             <g transform="translate(262, 114) rotate(-24)">
               <polygon points="-46,-20 -38,-58 -14,-32" fill="#F09B48"/>
               <polygon points="-39,-26 -35,-46 -21,-31" fill="#8C3D2B"/>
@@ -918,24 +274,19 @@ initCaptionsFromSrc();
               <path d="M-4,-1 L4,-1 L0,4 Z" fill="#6E2E20"/>
               <path d="M0,4 L0,10" stroke="#6E2E20" stroke-width="2"/>
             </g>
-
-            <!-- Оригинальный текст с иллюстрации -->
-            <text x="250" y="422" text-anchor="middle" fill="#231815" font-family="Inter, sans-serif" font-size="16" font-weight="500">
+            <text x="250" y="420" text-anchor="middle" fill="#231815" font-family="Inter, sans-serif" font-size="16" font-weight="500">
               POV продавец: Когда клиент хотел купить новую
             </text>
-            <text x="250" y="444" text-anchor="middle" fill="#231815" font-family="Inter, sans-serif" font-size="16" font-weight="500">
+            <text x="250" y="442" text-anchor="middle" fill="#231815" font-family="Inter, sans-serif" font-size="16" font-weight="500">
               сковородку, а ты убедил его в том, что новая
             </text>
-            <text x="250" y="466" text-anchor="middle" fill="#231815" font-family="Inter, sans-serif" font-size="16" font-weight="500">
+            <text x="250" y="464" text-anchor="middle" fill="#231815" font-family="Inter, sans-serif" font-size="16" font-weight="500">
               сковородка ни к чему на старой кухне...
             </text>
           </svg>
         `;
       }
     }
-
-    // Запускаем подтягивание названий при загрузке страницы
-    initCaptionsFromSrc();
   </script>
 </body>
 </html>
